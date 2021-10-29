@@ -17,3 +17,7 @@ wait until  contract is officially deployed to  local blockchain! Constructor ru
 ```shell
 console.log("Contract deployed to:", funContract.address);
 ```
+When we run scripts/run.js it's actually 
+1. Creating a new local Ethereum network.
+2. Deploying your contract.
+3. Then, when the script ends Hardhat will automatically destroy that local network.
