@@ -1,0 +1,44 @@
+.header{
+    text-align: center;
+    margin: 20px;
+    color: blue;
+    font-weight: bold;
+    font-size: 50px;
+}  
+.bio{
+    text-align: center;
+    margin: 10px;
+    font-size: 25px;
+}
+.name{
+    color: red;
+}
+
+.waveButton{
+    margin-top: 20px;
+    margin-right: 10px;
+     position:absolute;
+     top:0;
+     right:0;
+    background-color: #4a31b9; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.waveButton:hover{
+    background-color: #9942eb; /* Green */
+    color: white;
+    cursor: pointer;
+}
+.account{
+    margin-top: 25px;
+    margin-right: 10px;
+     position:absolute;
+     top:0;
+     right:0;
+     color: royalblue;
+}
