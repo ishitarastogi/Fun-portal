@@ -39,8 +39,7 @@ module.exports = {
     //   accounts: [process.env.a2key]
     // },
     rinkeby: {
-      url: "url",
-      accounts: ['PRIVATE-KEY']
+ 
     }
   },
   solidity: "0.8.3",

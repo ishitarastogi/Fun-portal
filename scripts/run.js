@@ -6,25 +6,27 @@ const main = async () => {
   await funContract.deployed();
   console.log("Contract deployed to:", funContract.address);
   console.log("Contract deployed by:", owner.address);
+  console.log("contract deployed to", randomPerson.address);
   let funCount;
    funCount = await funContract.getTotalFuns();
   
-  let funTxn = await funContract.Fun();
+  let funTxn = await funContract.Fun("this fun");
  // const funTxns = await funContract.Fun();
 
   await funTxn.wait();
   //await funTxns.wait();
   funCount = await funContract.getTotalFuns();
-  console.log('HEY')
 
-  funTxn = await funContract.connect(randomPerson).Fun();
-  console.log('HEY')
+  funTxn = await funContract.connect(randomPerson).Fun("This is fun");
 
   await funTxn.wait();
 
   funCount = await funContract.getTotalFuns();
 
-
+  let getFunss= await funContract.returnMessageDetails(randomPerson.address);
+  console.log(getFunss);
+let getFuns= await funContract.returnMessageDetailss();
+console.log(getFuns);
 };
 
 const runMain = async () => {

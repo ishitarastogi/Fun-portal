@@ -28,7 +28,23 @@
     text-decoration: none;
     font-size: 16px;
 }
-
+.wavesButton{
+    margin:auto;
+    display:block;
+    margin-top: 50px;  
+    background-color: #4a31b9; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+.wavesButton:hover{
+    background-color: #9942eb; /* Green */
+    color: white;
+    cursor: pointer; 
+}
 .waveButton:hover{
     background-color: #9942eb; /* Green */
     color: white;

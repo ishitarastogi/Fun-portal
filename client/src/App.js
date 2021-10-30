@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from "react";
 import classes from './App.module.css';
+import abi from './artifacts/contracts/FunPortal.sol/FunPortal.json'
+import { ethers } from "ethers";
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
-  
+  const contractAddress='0xa57b315d1666A8A411862a4e28dcA08752573d6C';
+  const contractABI = abi.abi;
+
   const checkIfWalletIsConnected = async () => {
     try {
       const { ethereum } = window;
+      //window.ethereum:
+    // MetaMask injects a global API into websites visited by its users at window.ethereum. 
+    // This API allows websites to request users' Ethereum accounts, read data from blockchains
+    //  the user is connected to, and suggest that the user sign messages and transactions.
 
       if (!ethereum) {
         console.log("Make sure you have metamask!");
@@ -15,6 +23,10 @@ const App = () => {
       }
 
       const accounts = await ethereum.request({ method: 'eth_accounts' });
+     // Returns a hexadecimal string representing the user's "currently selected" address.
+      //The "currently selected" address is the first item in the array returned by eth_accounts.
+
+
 
       if (accounts.length !== 0) {
         const account = accounts[0];
@@ -49,6 +61,40 @@ const App = () => {
     }
   }
 
+  const wave = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        let count = await wavePortalContract.getTotalFuns();
+        console.log("Retrieved total wave count...", count.toNumber());
+
+        /*
+        * Execute the actual wave from your smart contract
+        */
+        const waveTxn = await wavePortalContract.Fun();
+        console.log("Mining...", waveTxn.hash);
+
+        await waveTxn.wait();
+        console.log("Mined -- ", waveTxn.hash);
+
+        count = await wavePortalContract.getTotalFuns();
+        console.log("Retrieved total wave count...", count.toNumber());
+let counts=await wavePortalContract.getFunners(currentAccount)
+console.log("No of fun facts send by this address",counts.toNumber());
+        
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   useEffect(() => {
     checkIfWalletIsConnected();
   }, [])
@@ -64,7 +110,7 @@ const App = () => {
           This is <span className={classes.name}>Ishita</span>.
         </div>
 
-        <button className="waveButton" onClick={null}>
+        <button className={classes.wavesButton} onClick={wave}>
           Wave at Me
         </button>
         
@@ -76,6 +122,7 @@ const App = () => {
             Connect Wallet
           </button>
         )}
+
                   <div className={classes.account}>Address:{currentAccount}</div>
 
       </div>

@@ -6,15 +6,24 @@ import "hardhat/console.sol";
 
 contract FunPortal {
     uint256 totalFuns;
-    mapping(address=>uint)  funnersCount;
+    struct FunMessage{
+        string Message;
+        address funSender;
+        uint timestamp;
+    }
+    FunMessage[] FunMessages;
+    mapping(address=>FunMessage)  funnerDetails;
 
     constructor() {
         console.log("Yo yo, I am a contract am I am smart");
     }
 
-    function Fun() public {
+    function Fun(string memory _funMessage) public {
         totalFuns += 1;
-        funnersCount[msg.sender]++;
+        FunMessage memory funMessage=FunMessage(_funMessage,msg.sender,block.timestamp);
+
+FunMessages.push(funMessage);
+         funnerDetails[msg.sender]=funMessage;
         console.log("%s has send some fun stuff!", msg.sender);
     }
 
@@ -22,7 +31,11 @@ contract FunPortal {
         console.log("We have %d total funs stuffs!", totalFuns);
         return totalFuns;
     }
-    function getFunners(address _funnerAddress) public view returns(uint256){
-        return funnersCount[_funnerAddress];
+        function returnMessageDetails(address _address) public view returns(FunMessage memory) {
+        return funnerDetails[_address];
     }
+           function returnMessageDetailss() public view returns(FunMessage[] memory) {
+        return FunMessages;
+    }
+ 
 }
