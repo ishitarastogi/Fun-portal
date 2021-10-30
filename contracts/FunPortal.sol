@@ -31,10 +31,10 @@ FunMessages.push(funMessage);
         console.log("We have %d total funs stuffs!", totalFuns);
         return totalFuns;
     }
-        function returnMessageDetails(address _address) public view returns(FunMessage memory) {
+        function returnFunsDetails(address _address) public view returns(FunMessage memory) {
         return funnerDetails[_address];
     }
-           function returnMessageDetailss() public view returns(FunMessage[] memory) {
+           function returnFuns() public view returns(FunMessage[] memory) {
         return FunMessages;
     }
  
